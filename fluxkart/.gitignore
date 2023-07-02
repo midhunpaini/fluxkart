@@ -1,0 +1,26 @@
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore package dependencies
+venv/
+env/
+*.env
+pipenv.lock
+
+__pycache__/
+.pytest_cache/
+.pytest_cache
+
+# Ignore Django database migrations
+*/migrations/
+
+
+# PostgreSQL files to ignore
+*.psql
+*.backup
+*.pgdump
+*.sql
+*.dump
+*.tar
+*.tar.gz
