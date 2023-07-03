@@ -12,14 +12,12 @@ class IdentifyView(APIView):
         # Find existing contacts with the same email or phoneNumber
         
         contacts = Contact.objects.filter(Q(email=email) | Q(phoneNumber=phoneNumber))
-        print(contacts)
         if contacts.exists():
             current_contact = contacts.order_by('createdAt').first()
             linked_id = current_contact.linkedId or current_contact.id
             primary_contact = Contact.objects.filter(id=linked_id)
             linked_contacts = Contact.objects.filter(linkedId=linked_id)
             contacts = contacts | linked_contacts | primary_contact
-            print(contacts)
             dup_primary_contacts = contacts.filter(linkPrecedence='primary')
             if dup_primary_contacts.count() > 1:
                 dup_primary = dup_primary_contacts.order_by('createdAt').last()
